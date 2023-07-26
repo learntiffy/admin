@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="card p-4 mt-4 mb-5">
+
+        <div class="d-flex justify-content-between pb-2">
+            <span class="h4 fw-bold">Manage Items</span>
+            <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded ml-2"
+                (click)="showItemModal = true"></button>
+        </div>
+
+        <p-table #itemDt styleClass="p-datatable-sm" responsiveLayout="scroll" [value]="item" [rowHover]="true"
+            dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
+            [globalFilterFields]="['name', 'price', 'unit', 'type', 'status']">
+            <ng-template pTemplate="caption">
+                <div class="flex">
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="filter(itemDt, $event)" placeholder="Search keyword" />
+                        <button pButton pRipple type="button" icon="pi pi-filter-slash"
+                            class="p-button-rounded p-button-text" (click)="itemDt.clear()"></button>
+                    </span>
+                </div>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th>Image</th>
+                    <th pSortableColumn="name">
+                        Name <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="unit">
+                        Unit <p-sortIcon field="unit"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="price">
+                        Price <p-sortIcon field="price"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="type">
+                        <div class="flex align-items-center">
+                            Type
+                            <p-columnFilter field="type" matchMode="equals" [showMatchModes]="false"
+                                [showOperator]="false" [showAddButton]="false" [showClearButton]="false"
+                                [showApplyButton]="false" display="menu">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-dropdown [options]="types" (onChange)="filter($event.value)" placeholder="Any"
+                                        [showClear]="true">
+                                        <ng-template let-status pTemplate="item">
+                                            <span [class]="'type-badge type-' + (status ? status.toLowerCase() : '')">{{
+                                                status
+                                                }}</span>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex align-items-center">
+                            Status
+                            <p-columnFilter field="status" matchMode="equals" [showMatchModes]="false"
+                                [showOperator]="false" [showAddButton]="false" [showClearButton]="false"
+                                [showApplyButton]="false" display="menu">
+                                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                    <p-dropdown [options]="statuses" (onChange)="filter($event.value)" placeholder="Any"
+                                        [showClear]="true">
+                                        <ng-template let-status pTemplate="item">
+                                            <span
+                                                [class]="'status-badge status-' + (status ? status.toLowerCase() : '')">{{
+                                                status
+                                                }}</span>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </ng-template>
+                            </p-columnFilter>
+                        </div>
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-item>
+                <tr [pSelectableRow]="item">
+                    <td><img [src]="item.imageURL" [alt]="item.name" width="100" class="shadow-4" /></td>
+                    <td>{{item.name}} <i *ngIf="item.description" class="pi pi-info-circle"
+                            pTooltip="{{item.description}}" tooltipPosition="top"></i></td>
+                    <td>{{item.unit}}</td>
+                    <td><i class="fa fa-rupee"></i> {{item.price}}</td>
+                    <td>
+                        <span
+                            [class]="'type-badge type-' +(item.type ? item.type.toLowerCase() : '')">{{item.type}}</span>
+                    </td>
+                    <td>
+                        <span
+                            [class]="'status-badge status-' +(item.status ? item.status.toLowerCase() : '')">{{item.status}}</span>
+                    </td>
+                    <td>
+                        <button pButton pRipple icon="pi pi-pencil"
+                            class="p-button-rounded p-button-outlined p-button-primary mr-2"
+                            (click)="onEdit(item)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7" class="text-center">There are no item yet.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-progressBar *ngIf="isItemLoading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+    </div>
+</div>
+
+<app-add-item *ngIf="showItemModal" [_item]="selectedItem" (onSaveItem)="onSaveItem($event)"
+    (onClose)="onItemModalClose()"></app-add-item>

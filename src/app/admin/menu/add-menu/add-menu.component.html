@@ -1,0 +1,51 @@
+<p-sidebar [(visible)]="display" [fullScreen]="true" (onHide)="onClose.emit()">
+    <div id="add-menu" class="container">
+        <p-progressBar *ngIf="isLoading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+        <h4 [ngClass]="{'mt-2': isLoading}">
+            {{menu._id ? 'Edit' : 'Create'}} Menu
+            <button pButton pRipple type="button" [label]="menu._id ? 'Save' : 'Add'"
+                class="p-button-outlined float-end" (click)="addMenu()"></button>
+        </h4><br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="field">
+                    <label for="name" class="block">Name</label>
+                    <input id="name" type="text" placeholder="e.g. Monsoon Monday" [(ngModel)]="menu.name"
+                        aria-describedby="name-help" class="w-100" pInputText />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="field">
+                    <label for="meal" class="block">Meal</label>
+                    <p-selectButton id="meal" [(ngModel)]="menu.meal" [options]="mealTypes"></p-selectButton>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-5 mt-1">
+            <h6 class="pb-1">Select Menu Items</h6>
+            <p-pickList [source]="items" [target]="menu.items" sourceHeader="Available Items"
+                targetHeader="Selected Items" [responsive]="true" [sourceStyle]="{'height':'25rem'}"
+                [targetStyle]="{'height':'25rem'}" filterBy="name" sourceFilterPlaceholder="Search by name"
+                targetFilterPlaceholder="Search by name" [showSourceControls]="false" [showTargetControls]="false"
+                (onMoveToTarget)="sortSelectedItems()">
+                <ng-template let-item pTemplate="item">
+                    <div class="product-item">
+                        <div class="image-container">
+                            <img [src]="item.imageURL" [alt]="item.name" width="100" class="product-image" />
+                        </div>
+                        <div class="product-list-detail">
+                            <h5 class="mb-2">{{item.name}}</h5>
+                            <i class="pi pi-tag product-category-icon"></i>
+                            <span class="product-category">{{item.type}}</span>
+                        </div>
+                        <div class="product-list-action">
+                            <span [class]="'status-badge status-' + item.status.toLowerCase()"
+                                class="fs-14">{{item.status}}</span>
+                            <h6 class="mt-2"><i class="fa fa-rupee"></i>{{item.price}}</h6>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-pickList>
+        </div>
+    </div>
+</p-sidebar>

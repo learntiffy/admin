@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="card p-4 mt-4 mb-5">
+
+    <div class="d-flex justify-content-between pb-2">
+      <span class="h4 fw-bold">Manage Area</span>
+      <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded ml-2"
+        (click)="showAreaModal = true"></button>
+    </div>
+
+    <p-table #areaDt styleClass="p-datatable-sm" responsiveLayout="scroll" [value]="area" [rowHover]="true"
+      dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
+      [globalFilterFields]="['name', 'pincode', 'status']">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filter(areaDt, $event)" placeholder="Search keyword" />
+            <button pButton pRipple type="button" icon="pi pi-filter-slash" class="p-button-rounded p-button-text"
+              (click)="areaDt.clear()"></button>
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th pSortableColumn="name">
+            Name <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="pincode">
+            Pincode <p-sortIcon field="pincode"></p-sortIcon>
+          </th>
+          <th>
+            <div class="flex align-items-center">
+              Status
+              <p-columnFilter field="status" matchMode="equals" [showMatchModes]="false" [showOperator]="false"
+                [showAddButton]="false" [showClearButton]="false" [showApplyButton]="false" display="menu">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-dropdown [options]="statuses" (onChange)="filter($event.value)" placeholder="Any"
+                    [showClear]="true">
+                    <ng-template let-status pTemplate="item">
+                      <span [class]="'status-badge status-' + (status ? status.toLowerCase() : '')">{{ status
+                        }}</span>
+                    </ng-template>
+                  </p-dropdown>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-area>
+        <tr [pSelectableRow]="area">
+          <td>{{ area.name }}</td>
+          <td>{{ area.pincode }}</td>
+          <td>
+            <span
+              [class]="'status-badge status-' +(area.status ? area.status.toLowerCase() : '')">{{area.status}}</span>
+          </td>
+          <td>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-outlined p-button-primary mr-2"
+              (click)="onEdit(area)"></button>
+            <button pButton pRipple icon="fa fa-map-marked-alt"
+              class="p-button-rounded p-button-outlined p-button-primary mr-2" (click)="onViewSubArea(area)"></button>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" class="text-center">There are no area yet.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-progressBar *ngIf="isAreaLoading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+  </div>
+</div>
+
+<app-add-area *ngIf="showAreaModal" [_area]="selectedArea" (onSaveArea)="onSaveArea($event)"
+  (onClose)="onAreaModalClose()"></app-add-area>
+
+<app-sub-area *ngIf="showSubAreaModal" [area]="selectedArea" (onClose)="onSubAreaModalClose()"></app-sub-area>

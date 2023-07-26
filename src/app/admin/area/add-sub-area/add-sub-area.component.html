@@ -1,0 +1,19 @@
+<p-dialog [header]="subArea._id ? 'Edit SubArea' : 'Add SubArea'" [(visible)]="display" [modal]="true" position="top"
+    [style]="{width: '50vw'}" [breakpoints]="{'960px': '95vw'}" [style]="{width: '50vw'}" [draggable]="false"
+    [resizable]="false" (onHide)="onClose.emit()">
+    <div class="container">
+        <div class="field">
+            <label for="name" class="block">Name</label>
+            <input id="name" type="text" placeholder="e.g. Eklingji Road" [(ngModel)]="subArea.name"
+                aria-describedby="name-help" class="w-100" pInputText />
+        </div>
+        <div class="field">
+            <label for="status" class="block">Status</label>
+            <p-selectButton id="status" [(ngModel)]="subArea.status" [options]="statuses"></p-selectButton>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" [label]="subArea._id ? 'Save' : 'Add'" class="p-button-outlined"
+            (click)="addSubArea()"></button>
+    </ng-template>
+</p-dialog>

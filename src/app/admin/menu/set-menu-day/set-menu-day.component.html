@@ -1,0 +1,45 @@
+<p-dialog header="Set Menu" [(visible)]="display" [modal]="true" position="top" [style]="{width: '75vw'}"
+    [breakpoints]="{'960px': '95vw'}" [style]="{width: '75vw'}" [draggable]="false" [resizable]="false"
+    (onHide)="onClose.emit()">
+    <div class="container">
+        <p-table [value]="menu" [(selection)]="selectedMenu" dataKey="_id" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 3rem"></th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Items</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-menu>
+                <tr>
+                    <td>
+                        <p-tableRadioButton [value]="menu"></p-tableRadioButton>
+                    </td>
+                    <td>{{menu.name}}</td>
+                    <td><span [class]="'meal-badge meal-' + (menu.meal ? menu.meal.toLowerCase() : '')">
+                            {{menu.meal}}</span></td>
+                    <td>
+                        <button pButton pRipple [label]="menu.items.length"
+                            class="p-button-rounded p-button-outlined p-button-primary mr-2"
+                            (click)="onViewMenuItems(menu)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="4" class="text-center">There are no {{meal}} menu yet.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-progressBar *ngIf="isMenuLoading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" label="Save" class="p-button-outlined" (click)="saveMenuDay()"></button>
+    </ng-template>
+</p-dialog>
+
+
+<app-menu-items *ngIf="showMenuItemsModal" [menu]="selectedMenu" (onClose)="showMenuItemsModal=false"></app-menu-items>
+
+<p-toast></p-toast>

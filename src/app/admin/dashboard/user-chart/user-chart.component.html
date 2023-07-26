@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-md-12">
+        <div id="user-chart" class="card p-4">
+            <div class="d-flex justify-content-between pb-3">
+                <span class="h5">User Signups</span>
+                <div>
+                    Last: <p-dropdown [options]="days.options" [(ngModel)]="days.selected"
+                        optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <p-chart type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+                </div>
+                <div class="col-md-4">
+                    <p-chart type="doughnut" [data]="doughnutChartData" [options]="doughnutChartOptions"
+                        [style]="{'width': '50%'}"></p-chart>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

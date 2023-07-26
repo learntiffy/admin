@@ -1,0 +1,24 @@
+<p-dialog [header]="area._id ? 'Edit Area' : 'Add Area'" [(visible)]="display" [modal]="true" position="top"
+    [style]="{width: '50vw'}" [breakpoints]="{'960px': '95vw'}" [style]="{width: '50vw'}" [draggable]="false"
+    [resizable]="false" (onHide)="onClose.emit()">
+    <div class="container">
+        <div class="field">
+            <label for="name" class="block">Name</label>
+            <input id="name" type="text" placeholder="e.g. Sanand" [(ngModel)]="area.name" aria-describedby="name-help"
+                class="w-100" pInputText />
+        </div>
+        <div class="field">
+            <label for="pincode" class="block">Pincode</label>
+            <input id="pincode" type="number" placeholder="e.g. 382110" [(ngModel)]="area.pincode" aria-describedby="pincode-help" class="w-100"
+                pInputText />
+        </div>
+        <div class="field">
+            <label for="status" class="block">Status</label>
+            <p-selectButton id="status" [(ngModel)]="area.status" [options]="statuses"></p-selectButton>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" [label]="area._id ? 'Save' : 'Add'" class="p-button-outlined"
+            (click)="addArea()"></button>
+    </ng-template>
+</p-dialog>

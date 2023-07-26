@@ -1,0 +1,49 @@
+<p-dialog [header]="item._id ? 'Edit Item' : 'Add Item'" [(visible)]="display" [modal]="true" position="top"
+    [style]="{width: '60vw'}" [breakpoints]="{'960px': '95vw'}" [style]="{width: '60vw'}" [draggable]="false"
+    [resizable]="false" (onHide)="onClose.emit()">
+    <div class="container">
+        <div class="row mb-3 mt-1">
+            <div class="col-md-5">
+                <label for="image" class="block mb-1">Image</label>
+                <p-fileUpload mode="basic" name="image[]" accept="image/*" [maxFileSize]="2097152" [auto]="true"
+                    chooseLabel="Browse Image" chooseIcon="pi pi-upload"
+                    (onSelect)="onFileChange($event)"></p-fileUpload>
+            </div>
+            <div class="col md-9 d-flex justify-content-center">
+                <img [src]="item.filePath ? item.filePath : item.imageURL" style="max-width: 80%;">
+            </div>
+        </div>
+        <div class="field">
+            <label for="name" class="block">Name</label>
+            <input id="name" type="text" placeholder="e.g. Mag Masala" [(ngModel)]="item.name"
+                aria-describedby="name-help" class="w-100" pInputText />
+        </div>
+        <div class="field">
+            <label for="description" class="block">Description</label>
+            <textarea id="description" placeholder="Description goes here..." [rows]="3" class="w-100"
+                [(ngModel)]="item.description" pInputTextarea [autoResize]="true"></textarea>
+        </div>
+        <div class="field">
+            <label for="unit" class="block">Unit</label>
+            <input id="unit" type="string" placeholder="e.g. 200gm, 100ml, 5 piece" [(ngModel)]="item.unit"
+                aria-describedby="unit-help" class="w-100" pInputText />
+        </div>
+        <div class="field">
+            <label for="price" class="block">Price</label>
+            <input id="price" type="number" placeholder="e.g. 30" [(ngModel)]="item.price" aria-describedby="price-help"
+                class="w-100" pInputText />
+        </div>
+        <div class="field">
+            <label for="type" class="block">Type</label>
+            <p-selectButton id="type" [(ngModel)]="item.type" [options]="types"></p-selectButton>
+        </div>
+        <div class="field">
+            <label for="status" class="block">Status</label>
+            <p-selectButton id="status" [(ngModel)]="item.status" [options]="statuses"></p-selectButton>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple type="button" [label]="item._id ? 'Save' : 'Add'" class="p-button-outlined"
+            (click)="addItem()"></button>
+    </ng-template>
+</p-dialog>

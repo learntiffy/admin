@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand shadow">
+    <div class="ms-4 logo purple" role="button" (click)="toggleNav()">
+        <i *ngIf="appService.isLoggedIn" class="fa fa-bars"></i>
+        <span *ngIf="!appService.isLoggedIn">&nbsp;&nbsp;&nbsp;</span>
+    </div>
+    <div class="container justify-content-center">
+        <strong>
+            <a class="navbar-brand font-weight-bold logo purple">TIFFY</a>
+        </strong>
+    </div>
+    <div class="me-5"></div>
+</nav>
+
+<div id="mySidenav" class="sidenav shadow mt-2">
+    <a routerLink="/admin/dashboard" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fa fa-home w-15"></i> &nbsp; Dashboard
+    </a>
+    <a routerLink="/admin/users" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fas fa-users"></i>&nbsp; Users
+    </a>
+    <a routerLink="/admin/area" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fas fa-map-marker-alt"></i> &nbsp; Area
+    </a>
+    <a routerLink="/admin/item" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fa fa-cutlery w-15"></i> &nbsp; Item
+    </a>
+    <a routerLink="/admin/menu" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fa fa-cutlery w-15"></i> &nbsp; Menu
+    </a>
+    <a routerLink="/admin/set-menu" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fa fa-calendar-alt"></i> &nbsp; Set Menu
+    </a>
+    <a routerLink="/chef/business" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fa fa-inr w-15"></i> &nbsp; Business
+    </a>
+    <a routerLink="/chef/past-orders" routerLinkActive="active" (click)="toggleNav()">
+        <i class="fa fa-history w-15"></i> &nbsp; Past-Orders
+    </a>
+    <a (click)="logout()">
+        <i class="fa fa-sign-out w-15"></i> &nbsp; Logout
+    </a>
+</div>

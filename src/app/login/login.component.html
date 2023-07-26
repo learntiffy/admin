@@ -1,0 +1,32 @@
+<section class="h-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                    <div class="card-body p-4 text-center">
+                        <h3 class="mb-5 purple">Admin</h3>
+                        <form>
+                            <div class="form-outline mb-2">
+                                <span class="p-float-label">
+                                    <input name="userName" [(ngModel)]="userName" type="text" pInputText class="w-100">
+                                    <label for="float-input">Username</label>
+                                </span>
+                            </div><br>
+                            <div class="form-outline mb-4">
+                                <span class="p-float-label">
+                                    <input name="password" [(ngModel)]="password" type="password" pInputText class="w-100">
+                                    <label for="float-input">Password</label>
+                                </span>
+                            </div>
+                            <button pButton pRipple type="submit" label="Login" class="w-100" [disabled]="isLoading"
+                                (click)="login()"></button>
+                        </form>
+                        <div *ngIf="invalid" class="alert alert-danger mt-2" role="alert">
+                            Wrong Credentials!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

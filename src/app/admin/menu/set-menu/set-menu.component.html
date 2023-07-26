@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="card p-4 mt-4 mb-5">
+        <div class="pb-2">
+            <span class="h4 fw-bold">Set Menu</span>
+        </div>
+
+        <ng-container *ngIf="isLoading">
+            <br><p-progressBar mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+        </ng-container>
+
+        <div *ngIf="!isLoading" class="row mt-3 fs-18">
+            <div *ngFor="let day of menuDays | keyvalue" class="col-md-6 mb-4">
+                <div class="fw-bold w-100">
+                    <div class="alert alert-secondary d-flex justify-content-center w-100 p-1" role="alert">
+                        <span *ngIf="day.key == 'today'">{{todayDate | date: 'mediumDate'}} (Today)</span>
+                        <span *ngIf="day.key == 'tomo'">{{tomoDate | date: 'mediumDate'}} (Tomorrow)</span>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div *ngFor="let meal of $any(day.value) | keyvalue" class="col-md-6 float-end">
+                        <div class="product-item">
+                            <div class="product-item-content">
+                                <div>
+                                    <h4 class="mb-4 text-truncate">{{$any(meal.value).menu.name}}</h4>
+                                    <span *ngIf="meal.key == 'lunch'" class="meal-badge meal-lunch fs-16">LUNCH</span>
+                                    <span *ngIf="meal.key == 'dinner'"
+                                        class="meal-badge meal-dinner fs-16">DINNER</span>
+                                    <div class="car-buttons mt-4">
+                                        <p-button type="button"
+                                            styleClass="p-button p-button-rounded p-button-outlined mr-2"
+                                            icon="pi pi-eye"
+                                            (click)="onViewMenuItems($any(meal.value).menu)"></p-button>
+                                        <p-button type="button"
+                                            styleClass="p-button p-button-rounded p-button-outlined mr-2"
+                                            icon="pi pi-pencil" (click)="onEdit($any(meal.value).menu)"></p-button>
+                                        <p-button type="button"
+                                            styleClass="p-button p-button-rounded p-button-outlined mr-2"
+                                            icon="pi pi-cog" (click)="onMenuSelection($any(meal.value), meal.key)"></p-button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-menu-items *ngIf="showMenuItemsModal" [menu]="selectedMenu" (onClose)="showMenuItemsModal=false"></app-menu-items>
+
+<app-add-menu *ngIf="showMenuModal" [_menu]="selectedMenu" (onSaveMenu)="showMenuModal=false"
+    (onClose)="showMenuModal=false"></app-add-menu>
+
+<app-set-menu-day *ngIf="showMenuSelectionModal" [menuDay]="menuDay" [meal]="meal"
+    (onClose)="showMenuSelectionModal=false"></app-set-menu-day>

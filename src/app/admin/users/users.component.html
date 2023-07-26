@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="card p-4 mt-4 mb-5">
+
+    <div class="d-flex justify-content-between pb-2">
+      <span class="h4 fw-bold mt-1">Users</span>
+      <div class="d-flex justify-content-end">
+        <button type="button" pButton pRipple icon="pi pi-file" (click)="userDt.exportCSV()"
+          class="p-button-rounded p-button-outlined mx-2" pTooltip="CSV" tooltipPosition="bottom"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-excel"
+          class="p-button-rounded p-button-outlined p-button-success mr-2" pTooltip="XLS" tooltipPosition="bottom"
+          (click)="exportExcel()"></button>
+        <button type="button" pButton pRipple icon="pi pi-file-pdf"
+          class="p-button-rounded p-button-outlined p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"
+          (click)="exportPdf()"></button>
+        <button type="button" pButton pRipple icon="pi pi-filter" (click)="userDt.exportCSV({selectionOnly:true})"
+          class="p-button-rounded p-button-outlined p-button-info" pTooltip="Selection Only"
+          tooltipPosition="bottom"></button>
+      </div>
+    </div>
+
+    <p-table #userDt [columns]="cols" [value]="users" dataKey="_id" [rowHover]="true" [resizableColumns]="true"
+      selectionMode="multiple" columnResizeMode="expand"
+      [globalFilterFields]="['firstName', 'lastName', 'mobile', 'email', 'status']" responsiveLayout="scroll">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <span class="p-input-icon-left ml-auto">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" (input)="filter(userDt, $event)" placeholder="Search keyword" />
+            <button pButton pRipple type="button" icon="pi pi-filter-slash" class="p-button-rounded p-button-text"
+              (click)="userDt.clear()"></button>
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th pSortableColumn="firstName">
+            First Name <p-sortIcon field="firstName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastName">
+            Last Name <p-sortIcon field="lastName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="mobile">
+            Mobile <p-sortIcon field="mobile"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            Email <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th>
+            <div class="flex align-items-center">
+              Status
+              <p-columnFilter field="status" matchMode="equals" [showMatchModes]="false" [showOperator]="false"
+                [showAddButton]="false" [showClearButton]="false" [showApplyButton]="false" display="menu">
+                <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                  <p-dropdown [options]="statuses" (onChange)="filter($event.value)" placeholder="Any"
+                    [showClear]="true">
+                    <ng-template let-status pTemplate="item">
+                      <span [class]="'status-badge status-' + (status ? status.toLowerCase() : '')">{{status}}</span>
+                    </ng-template>
+                  </p-dropdown>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-user>
+        <tr [pSelectableRow]="user">
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td>{{user.mobile}}</td>
+          <td>{{user.email}}</td>
+          <td>
+            <span
+              [class]="'status-badge status-' +(user.status ? user.status.toLowerCase() : '')">{{user.status}}</span>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="8" class="text-center">There are no user yet.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-progressBar *ngIf="isLoading" mode="indeterminate" [style]="{'height': '6px'}"></p-progressBar>
+  </div>
+</div>
