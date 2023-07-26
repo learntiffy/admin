@@ -66,7 +66,7 @@ export class UserChartComponent implements OnInit {
 
   getLineChartData() {
     this.lineChartData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['20 July', '21 July', '22 July', '23 July', '24 July', '25 July', '26 July'],
       datasets: [
         {
           data: [12, 51, 62, 33, 21, 62, 45],

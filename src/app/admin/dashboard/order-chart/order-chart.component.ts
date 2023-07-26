@@ -69,7 +69,7 @@ export class OrderChartComponent implements OnInit {
 
   getStackedChartData() {
     this.stackedChartData = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      labels: ['20 July', '21 July', '22 July', '23 July', '24 July', '25 July', '26 July'],
       datasets: [
         {
           type: 'bar',
