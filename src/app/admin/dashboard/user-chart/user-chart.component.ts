@@ -96,13 +96,8 @@ export class UserChartComponent implements OnInit {
       labels: ['Verified', 'Not Verified'],
       datasets: [
         {
-          data: [50, 32],
+          data: [120, 54],
           backgroundColor: [
-            "#eccfff",
-            "#b3e5fc",
-            
-          ],
-          hoverBackgroundColor: [
             "#eccfff",
             "#b3e5fc",
           ]

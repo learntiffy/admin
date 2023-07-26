@@ -14,22 +14,25 @@
                     <p-chart type="bar" [data]="stackedChartData" [options]="stackedChartOptions"></p-chart>
                 </div>
                 <div class="col-md-4">
-                    <p-chart type="pie" [data]="pieChartData" [options]="pieChartOptions"
+                    <p-chart type="pie" [data]="pieChartData1" [options]="pieChartOptions"
                         [style]="{'width': '50%'}"></p-chart>
                 </div>
             </div>
 
             <div class="row pb-4">
                 <div class="col-md-4 mb-4">
-                    <p-chart type="pie" [data]="pieChartData" [options]="pieChartOptions"
+                    <h5 class="d-flex justify-content-center">Area wise</h5>
+                    <p-chart type="pie" [data]="pieChartData2" [options]="pieChartOptions"
                         [style]="{'width': '50%'}"></p-chart>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <p-chart type="pie" [data]="pieChartData" [options]="pieChartOptions"
+                    <h5 class="d-flex justify-content-center">Item wise</h5>
+                    <p-chart type="pie" [data]="pieChartData3" [options]="pieChartOptions"
                         [style]="{'width': '50%'}"></p-chart>
                 </div>
                 <div class="col-md-4">
-                    <p-chart type="pie" [data]="pieChartData" [options]="pieChartOptions"
+                    <h5 class="d-flex justify-content-center">Item wise</h5>
+                    <p-chart type="pie" [data]="pieChartData3" [options]="pieChartOptions"
                         [style]="{'width': '50%'}"></p-chart>
                 </div>
             </div>

@@ -16,7 +16,9 @@ export class OrderChartComponent implements OnInit {
   stackedChartData: any;
   stackedChartOptions: any;
 
-  pieChartData: any;
+  pieChartData1: any;
+  pieChartData2: any;
+  pieChartData3: any;
   pieChartOptions: any;
 
   constructor() { }
@@ -26,7 +28,9 @@ export class OrderChartComponent implements OnInit {
     this.getStackedChartData();
 
     this.setPieChartOptions();
-    this.getPieChartData();
+    this.getPieChartData1();
+    this.getPieChartData2();
+    this.getPieChartData3();
   }
 
   setStackedChartOptions() {
@@ -109,17 +113,13 @@ export class OrderChartComponent implements OnInit {
     }
   }
 
-  getPieChartData() {
-    this.pieChartData = {
+  getPieChartData1() {
+    this.pieChartData1 = {
       labels: ['Lunch', 'Dinner'],
       datasets: [
         {
-          data: [300, 50],
+          data: [300, 150],
           backgroundColor: [
-            "#eccfff",
-            "#b3e5fc",
-          ],
-          hoverBackgroundColor: [
             "#eccfff",
             "#b3e5fc",
           ]
@@ -127,4 +127,41 @@ export class OrderChartComponent implements OnInit {
       ]
     };
   }
+
+  getPieChartData2() {
+    this.pieChartData2 = {
+      labels: ['Eklingji Road', 'Ghoda Gadi', 'Sanand Police Station', 'Sanand Bus Stand', 'Sanand GIDC'],
+      datasets: [
+        {
+          data: [20, 60, 25, 37, 8],
+          backgroundColor: [
+            "#eccfff",
+            "#c7eeea",
+            "#FEEDAF",
+            "#fad3e7",
+            "#b3e5fc",
+          ]
+        }
+      ]
+    };
+  }
+
+  getPieChartData3() {
+    this.pieChartData3 = {
+      labels: ['Mag Masala', 'Chana Masala', 'Gulab Jaamun', 'Paneer Tika', 'Roti'],
+      datasets: [
+        {
+          data: [39, 40, 65, 17, 73],
+          backgroundColor: [
+            "#eccfff",
+            "#c7eeea",
+            "#FEEDAF",
+            "#fad3e7",
+            "#b3e5fc",
+          ]
+        }
+      ]
+    };
+  }
+
 }
