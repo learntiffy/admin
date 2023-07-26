@@ -7,9 +7,9 @@ import { Area } from '../models/area.model';
 import { SubArea } from '../models/subarea.model';
 import { Item } from '../models/item.model';
 import { Menu } from '../models/menu.model';
+import { environment } from 'src/environments/environment';
 
-const host = "https://tiffy-backend.onrender.com";
-// const host = "https://tiffylearn2-zany-space-parakeet-wr7v6v5gg99qf5w5r-9999.preview.app.github.dev";
+const host = environment.api_url;
 
 @Injectable({
   providedIn: 'root'
