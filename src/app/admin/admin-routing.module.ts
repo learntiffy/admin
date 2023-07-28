@@ -6,6 +6,7 @@ import { ItemComponent } from './item/item.component';
 import { MenuComponent } from './menu/menu.component';
 import { SetMenuComponent } from './menu/set-menu/set-menu.component';
 import { UsersComponent } from './users/users.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
     {
@@ -38,6 +39,10 @@ const routes: Routes = [
             {
                 path: 'set-menu',
                 component: SetMenuComponent,
+            },
+            {
+                path: 'orders',
+                component: OrdersComponent,
             },
         ],
     },

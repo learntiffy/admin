@@ -3,6 +3,7 @@ export class AppConstants {
     static readonly AREA_STATUSES = ["ACTIVE", "INACTIVE"];
     static readonly SUBAREA_STATUSES = ["ACTIVE", "INACTIVE"];
     static readonly ITEM_STATUSES = ["ACTIVE", "INACTIVE"];
+    static readonly ORDER_STATUSES = ["ORDERED", "DELIVERED"];
     static readonly ITEM_TYPES = ["SABJI", "ROTI", "DAL", "RICE", "SPECIAL"];
     static readonly MEAL_TYPES = ["LUNCH", "DINNER"];
 
