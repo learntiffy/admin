@@ -69,9 +69,10 @@ export class OrdersComponent implements OnInit {
       meal: order.meal,
       items: order.items.map(x => x.name),
       _items: order.items.map(x => x.name).toString(),
+      comment: order.comment,
       orderDate: order.orderDate,
       rating: feedback ? feedback.foodRating : null,
-      comment: feedback ? feedback.comment : null
+      feedback: feedback ? feedback.comment : null
     };
     return orderData;
   }

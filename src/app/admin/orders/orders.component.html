@@ -3,8 +3,8 @@
 
         <div class="d-flex justify-content-between pb-2">
             <span class="h4 fw-bold mt-1">Orders</span>
-            <i class="fa fa-info-circle fs-20 m-2 purple cursor-pointer" pTooltip="Stats" tooltipPosition="bottom"
-                (click)="onShowStats()"></i>
+            <i *ngIf="orderData.length > 0" class="fa fa-info-circle fs-20 m-2 purple cursor-pointer" pTooltip="Stats"
+                tooltipPosition="bottom" (click)="onShowStats()"></i>
         </div>
 
         <div id="order-actions" class="d-flex justify-content-between pb-2">
@@ -20,8 +20,8 @@
             </div>
         </div>
 
-        <p-table #orderDt responsiveLayout="scroll" [value]="orderData" [rowHover]="true" selectionMode="multiple"
-            dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
+        <p-table #orderDt responsiveLayout="scroll" [value]="orderData" [rowHover]="true" dataKey="_id"
+            [resizableColumns]="true" columnResizeMode="expand"
             [globalFilterFields]="['user', 'address', 'amount', 'meal']">
             <ng-template pTemplate="caption">
                 <div class="flex">
@@ -43,6 +43,7 @@
                     <th pSortableColumn="items">
                         Items <p-sortIcon field="items"></p-sortIcon>
                     </th>
+                    <th>Comment</th>
                     <th>Address</th>
                     <th pSortableColumn="area">
                         Area <p-sortIcon field="area"></p-sortIcon>
@@ -59,7 +60,7 @@
                     <th pSortableColumn="rating">
                         Rating <p-sortIcon field="rating"></p-sortIcon>
                     </th>
-                    <th>Comment</th>
+                    <th>Feedback</th>
                 </tr>
             </ng-template>
 
@@ -69,6 +70,7 @@
                     <td>{{order.contact}}</td>
                     <td><span *ngFor="let item of order.items"
                             [class]="'item-badge meal-' + order.meal.toLowerCase()">{{item}}</span></td>
+                    <td>{{order.comment}}</td>
                     <td>{{order.address}}</td>
                     <td>{{order.area}}</td>
                     <td>{{order.amount}}</td>
@@ -79,7 +81,7 @@
                         <p-rating *ngIf="order.rating" [ngModel]="order.rating" [readonly]="true" [stars]="5"
                             [cancel]="false"></p-rating>
                     </td>
-                    <td>{{order.comment}}</td>
+                    <td>{{order.feedback}}</td>
                 </tr>
             </ng-template>
 
@@ -95,17 +97,17 @@
 
 <p-dialog header="Statistics" [(visible)]="showStats" [modal]="true" [style]="{width: '50vw'}"
     [breakpoints]="{'960px': '95vw'}" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-    <p-table [value]="stats" responsiveLayout="scroll">
+    <p-table [value]="stats" responsiveLayout="scroll" styleClass="p-datatable-sm">
         <ng-template pTemplate="header">
             <tr>
                 <th>Item</th>
-                <th>Quantity</th>
+                <th class="text-center">Quantity</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-stat>
             <tr>
                 <td>{{stat.item}}</td>
-                <td>{{stat.count}}</td>
+                <td class="text-center">{{stat.count}}</td>
             </tr>
         </ng-template>
     </p-table>

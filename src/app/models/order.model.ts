@@ -9,6 +9,7 @@ export interface Order {
     address: Address,
     feedback: Feedback,
     items: Item[],
+    comment: string,
     amount: number,
     paymentMode: string,
     txnId: string,
