@@ -17,6 +17,9 @@ export class OrdersComponent implements OnInit {
   orderData: any;
   isLoading = true;
 
+  stats: any;
+  showStats = false;
+
   exportColumns: any;
 
   constructor(private adminService: AdminService) { }
@@ -71,6 +74,21 @@ export class OrdersComponent implements OnInit {
       comment: feedback ? feedback.comment : null
     };
     return orderData;
+  }
+
+  onShowStats() {
+    this.stats = {};
+    for (const order of this.orderData)
+      for (const item of order.items)
+        this.stats[item] = this.stats[item] ? (this.stats[item] + 1) : 1;
+
+    const stats = [];
+    for (const [key, value] of Object.entries(this.stats)) {
+      stats.push({ item: key, count: value });
+    }
+    this.stats = stats;
+    this.stats = this.stats.sort((a: any, b: any) => b.count - a.count);
+    this.showStats = true;
   }
 
   filter(orderDt: any, event: any) {
