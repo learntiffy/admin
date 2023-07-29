@@ -19,13 +19,13 @@
             dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
             [globalFilterFields]="['user', 'address', 'amount', 'meal']">
             <ng-template pTemplate="caption">
-                <div class="flex">
-                    <span class="p-input-icon-left ml-auto">
+                <div class="d-flex justify-content-end">
+                    <span class="p-input-icon-left">
                         <i class="pi pi-search"></i>
                         <input pInputText type="text" (input)="filter(orderDt, $event)" placeholder="Search keyword" />
-                        <button pButton pRipple type="button" icon="pi pi-filter-slash"
-                            class="p-button-rounded p-button-text" (click)="orderDt.clear()"></button>
                     </span>
+                    <button pButton pRipple type="button" icon="pi pi-filter-slash"
+                        class="p-button-rounded p-button-text" (click)="orderDt.clear()"></button>
                 </div>
             </ng-template>
 

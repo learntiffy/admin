@@ -19,13 +19,13 @@
       columnResizeMode="expand" [globalFilterFields]="['firstName', 'lastName', 'mobile', 'email', 'status']"
       responsiveLayout="scroll">
       <ng-template pTemplate="caption">
-        <div class="flex">
-          <span class="p-input-icon-left ml-auto">
+        <div class="d-flex justify-content-end">
+          <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input pInputText type="text" (input)="filter(userDt, $event)" placeholder="Search keyword" />
-            <button pButton pRipple type="button" icon="pi pi-filter-slash" class="p-button-rounded p-button-text"
-              (click)="userDt.clear()"></button>
           </span>
+          <button pButton pRipple type="button" icon="pi pi-filter-slash" class="p-button-rounded p-button-text"
+            (click)="userDt.clear()"></button>
         </div>
       </ng-template>
 
