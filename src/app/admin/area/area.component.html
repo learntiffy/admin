@@ -11,15 +11,15 @@
       dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
       [globalFilterFields]="['name', 'pincode', 'status']">
       <ng-template pTemplate="caption">
-        <div class="d-flex justify-content-end">
-          <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText type="text" (input)="filter(areaDt, $event)" placeholder="Search keyword" />
-          </span>
-          <button pButton pRipple type="button" icon="pi pi-filter-slash" class="p-button-rounded p-button-text"
-            (click)="areaDt.clear()"></button>
+        <div class="flex">
+            <span class="p-input-icon-left ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="filter(areaDt, $event)" placeholder="Search keyword" />
+                <button pButton pRipple type="button" icon="pi pi-filter-slash"
+                    class="p-button-rounded p-button-text" (click)="areaDt.clear()"></button>
+            </span>
         </div>
-      </ng-template>
+    </ng-template>
 
       <ng-template pTemplate="header" let-columns>
         <tr>
