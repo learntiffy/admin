@@ -252,6 +252,23 @@ body {
     }
 }
 
+.item-badge {
+    padding: 0.375rem 0.75rem;
+    margin: 0.2rem;
+    border-radius: 6px;
+    font-size: 14px;
+
+    &.meal-lunch {
+        background: #eccfff;
+        color: #694382;
+    }
+
+    &.meal-dinner {
+        background: #b3e5fc;
+        color: #23547b;
+    }
+}
+
 .p-column-filter-overlay-menu .p-column-filter-buttonbar {
     padding: 0;
 }
@@ -285,4 +302,15 @@ body {
 
 #user-chart .p-inputtext {
     padding: 2px 10px;
+}
+
+#order-actions {
+    .p-datepicker table th {
+        text-align: center;
+    }
+
+    .p-calendar-w-btn .p-inputtext {
+        width: 120px;
+    }
+
 }

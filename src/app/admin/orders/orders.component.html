@@ -1,27 +1,23 @@
 <div class="container">
     <div class="card p-4 mt-4 mb-5">
 
-        <div class="d-flex justify-content-between pb-2">
-            <span class="h4 fw-bold mt-1">Orders</span>
+        <span class="h4 fw-bold mt-1">Orders</span>
+        <div id="order-actions" class="d-flex justify-content-between pb-2">
+            <p-calendar [(ngModel)]="date" [maxDate]="maxDate" [showIcon]="true" inputId="icon" dateFormat="dd/mm/yy"
+                (onSelect)="getOrders()"></p-calendar>
             <div class="d-flex justify-content-end">
-                <button type="button" pButton pRipple icon="pi pi-file" (click)="orderDt.exportCSV()"
-                    class="p-button-rounded p-button-outlined mx-2" pTooltip="CSV" tooltipPosition="bottom"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-excel"
                     class="p-button-rounded p-button-outlined p-button-success mr-2" pTooltip="XLS"
                     tooltipPosition="bottom" (click)="exportExcel()"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf"
                     class="p-button-rounded p-button-outlined p-button-warning mr-2" pTooltip="PDF"
                     tooltipPosition="bottom" (click)="exportPdf()"></button>
-                <button type="button" pButton pRipple icon="pi pi-filter"
-                    (click)="orderDt.exportCSV({selectionOnly:true})"
-                    class="p-button-rounded p-button-outlined p-button-info" pTooltip="Selection Only"
-                    tooltipPosition="bottom"></button>
             </div>
         </div>
 
-        <p-table #orderDt styleClass="p-datatable-sm" responsiveLayout="scroll" [value]="orders" [rowHover]="true"
-            selectionMode="multiple" dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
-            [globalFilterFields]="['name', 'price', 'unit', 'type', 'status']">
+        <p-table #orderDt responsiveLayout="scroll" [value]="orderData" [rowHover]="true" selectionMode="multiple"
+            dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
+            [globalFilterFields]="['user', 'address', 'amount', 'meal']">
             <ng-template pTemplate="caption">
                 <div class="flex">
                     <span class="p-input-icon-left ml-auto">
@@ -35,30 +31,56 @@
 
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th pSortableColumn="name">
+                    <th pSortableColumn="user">
                         User <p-sortIcon field="user"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="address">
-                        Address <p-sortIcon field="address"></p-sortIcon>
+                    <th>Contact</th>
+                    <th pSortableColumn="items">
+                        Items <p-sortIcon field="items"></p-sortIcon>
                     </th>
+                    <th>Address</th>
                     <th pSortableColumn="area">
                         Area <p-sortIcon field="area"></p-sortIcon>
                     </th>
                     <th pSortableColumn="amount">
                         Amount <p-sortIcon field="amount"></p-sortIcon>
                     </th>
+                    <th pSortableColumn="meal">
+                        Meal <p-sortIcon field="meal"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="orderDate">
+                        Ordered On <p-sortIcon field="orderDate"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="rating">
+                        Rating <p-sortIcon field="rating"></p-sortIcon>
+                    </th>
+                    <th>Comment</th>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="body" let-order>
                 <tr [pSelectableRow]="order">
-
+                    <td>{{order.user}}</td>
+                    <td>{{order.contact}}</td>
+                    <td><span *ngFor="let item of order.items"
+                            [class]="'item-badge meal-' + order.meal.toLowerCase()">{{item}}</span></td>
+                    <td>{{order.address}}</td>
+                    <td>{{order.area}}</td>
+                    <td>{{order.amount}}</td>
+                    <td><span [class]="'meal-badge meal-' + (order.meal ? order.meal.toLowerCase() : '')">
+                            {{order.meal}}</span></td>
+                    <td>{{order.orderDate | date: 'medium'}}</td>
+                    <td>
+                        <p-rating *ngIf="order.rating" [ngModel]="order.rating" [readonly]="true" [stars]="5"
+                            [cancel]="false"></p-rating>
+                    </td>
+                    <td>{{order.comment}}</td>
                 </tr>
             </ng-template>
 
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td colspan="7" class="text-center">There are no orders yet.</td>
+                    <td colspan="10">There are no orders yet.</td>
                 </tr>
             </ng-template>
         </p-table>

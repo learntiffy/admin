@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { ChartModule } from 'primeng/chart';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
+import { RatingModule } from 'primeng/rating';
 import { DialogModule } from 'primeng/dialog';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
 import { TooltipModule } from 'primeng/tooltip';
+import { CalendarModule } from 'primeng/calendar';
 import { PickListModule } from 'primeng/picklist';
 import { DragDropModule } from 'primeng/dragdrop';
 import { DropdownModule } from 'primeng/dropdown';
@@ -64,11 +66,13 @@ import { OrdersComponent } from './orders/orders.component';
     ChartModule,
     TableModule,
     ToastModule,
+    RatingModule,
     DialogModule,
     RippleModule,
     ButtonModule,
     SidebarModule,
     TooltipModule,
+    CalendarModule,
     DropdownModule,
     PickListModule,
     DragDropModule,

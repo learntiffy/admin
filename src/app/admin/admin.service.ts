@@ -121,7 +121,7 @@ export class AdminService {
     return this.http.get<Response>(`${host}/admin/get/menuDay`);
   }
 
-  public getOrders(date: string): Observable<Response> {
+  public getOrders(date: Date): Observable<Response> {
     return this.http.get<Response>(`${host}/admin/get/order?date=${date}`);
   }
 

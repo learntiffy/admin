@@ -12,15 +12,12 @@
         <button type="button" pButton pRipple icon="pi pi-file-pdf"
           class="p-button-rounded p-button-outlined p-button-warning mr-2" pTooltip="PDF" tooltipPosition="bottom"
           (click)="exportPdf()"></button>
-        <button type="button" pButton pRipple icon="pi pi-filter" (click)="userDt.exportCSV({selectionOnly:true})"
-          class="p-button-rounded p-button-outlined p-button-info" pTooltip="Selection Only"
-          tooltipPosition="bottom"></button>
       </div>
     </div>
 
     <p-table #userDt [columns]="cols" [value]="users" dataKey="_id" [rowHover]="true" [resizableColumns]="true"
-      selectionMode="multiple" columnResizeMode="expand"
-      [globalFilterFields]="['firstName', 'lastName', 'mobile', 'email', 'status']" responsiveLayout="scroll">
+      columnResizeMode="expand" [globalFilterFields]="['firstName', 'lastName', 'mobile', 'email', 'status']"
+      responsiveLayout="scroll">
       <ng-template pTemplate="caption">
         <div class="flex">
           <span class="p-input-icon-left ml-auto">
