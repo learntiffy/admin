@@ -30,7 +30,8 @@ export class AddSubAreaComponent implements OnInit {
     else this.subArea.area = this.area._id;
   }
 
-  addSubArea() {
+  addSubArea(event: any) {
+    event.target.disabled = true;
     const subArea: SubArea = { ...this.subArea };
     this.adminSerive.saveSubArea(subArea).subscribe((res) => {
       if (res.status == 200) {

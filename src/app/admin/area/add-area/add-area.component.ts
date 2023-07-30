@@ -27,7 +27,8 @@ export class AddAreaComponent implements OnInit {
     if (this._area) this.area = { ...this._area };
   }
 
-  addArea() {
+  addArea(event: any) {
+    event.target.disabled = true;
     const area: Area = { ...this.area };
     this.adminSerive.saveArea(area).subscribe((res) => {
       if (res.status == 200) {

@@ -33,7 +33,8 @@ export class AddItemComponent implements OnInit {
     if (this._item) this.item = { ...this._item };
   }
 
-  addItem() {
+  addItem(event: any) {
+    event.target.disabled = true;
     const item: Item = { ...this.item };
     this.adminSerive.saveItem(item).subscribe((res) => {
       if (res.status == 200) {

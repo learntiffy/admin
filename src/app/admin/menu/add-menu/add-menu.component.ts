@@ -17,7 +17,7 @@ export class AddMenuComponent implements OnInit {
   mealTypes = AppConstants.MEAL_TYPES;
   display = true;
 
-  isLoading =  true;
+  isLoading = true;
   items: Item[] = [];
   menu: any = {
     name: null,
@@ -39,15 +39,16 @@ export class AddMenuComponent implements OnInit {
           const selectedItems = this.items.filter(x => this._menu.items.includes(x._id));
           const available = this.items.filter(x => !this._menu.items.includes(x._id));
           this.items = available;
-          this._menu.items = selectedItems;
-          this.menu = {...this._menu};
+          this.menu = { ...this._menu };
+          this.menu.items = selectedItems;
         }
         this.isLoading = false;
       }
     })
   }
 
-  addMenu() {
+  addMenu(event: any) {
+    event.target.disabled = true;
     this.menu.items = this.menu.items.map((x: any) => x._id);
     const menu: Menu = { ...this.menu };
     this.adminSerive.saveMenu(menu).subscribe((res) => {

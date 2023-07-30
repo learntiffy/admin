@@ -4,7 +4,7 @@
         <h4 [ngClass]="{'mt-2': isLoading}">
             {{menu._id ? 'Edit' : 'Create'}} Menu
             <button pButton pRipple type="button" [label]="menu._id ? 'Save' : 'Add'"
-                class="p-button-outlined float-end" (click)="addMenu()"></button>
+                class="p-button-outlined float-end" (click)="addMenu($event)"></button>
         </h4><br>
         <div class="row">
             <div class="col-md-6">

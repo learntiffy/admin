@@ -11,7 +11,8 @@
     <div class="me-5"></div>
 </nav>
 
-<div id="mySidenav" class="sidenav shadow mt-2">
+<div id="mySidenav" class="sidenav shadow mt-2"
+    [ngClass]="{'d-none': !appService.isLoggedIn, 'd-block': appService.isLoggedIn}">
     <a routerLink="/admin/dashboard" routerLinkActive="active" (click)="toggleNav()">
         <i class="fa fa-home w-15"></i> &nbsp; Dashboard
     </a>

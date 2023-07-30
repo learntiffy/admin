@@ -14,6 +14,6 @@
     </div>
     <ng-template pTemplate="footer">
         <button pButton pRipple type="button" [label]="subArea._id ? 'Save' : 'Add'" class="p-button-outlined"
-            (click)="addSubArea()"></button>
+            (click)="addSubArea($event)"></button>
     </ng-template>
 </p-dialog>

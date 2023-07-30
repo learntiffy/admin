@@ -44,6 +44,6 @@
     </div>
     <ng-template pTemplate="footer">
         <button pButton pRipple type="button" [label]="item._id ? 'Save' : 'Add'" class="p-button-outlined"
-            (click)="addItem()"></button>
+            (click)="addItem($event)"></button>
     </ng-template>
 </p-dialog>

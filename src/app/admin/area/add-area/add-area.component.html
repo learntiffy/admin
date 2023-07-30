@@ -9,8 +9,8 @@
         </div>
         <div class="field">
             <label for="pincode" class="block">Pincode</label>
-            <input id="pincode" type="number" placeholder="e.g. 382110" [(ngModel)]="area.pincode" aria-describedby="pincode-help" class="w-100"
-                pInputText />
+            <input id="pincode" type="number" placeholder="e.g. 382110" [(ngModel)]="area.pincode"
+                aria-describedby="pincode-help" class="w-100" pInputText />
         </div>
         <div class="field">
             <label for="status" class="block">Status</label>
@@ -19,6 +19,6 @@
     </div>
     <ng-template pTemplate="footer">
         <button pButton pRipple type="button" [label]="area._id ? 'Save' : 'Add'" class="p-button-outlined"
-            (click)="addArea()"></button>
+            (click)="addArea($event)"></button>
     </ng-template>
 </p-dialog>
