@@ -4,7 +4,7 @@
         <h4 [ngClass]="{'mt-2': isLoading}">
             {{menu._id ? 'Edit' : 'Create'}} Menu
             <button pButton pRipple type="button" [label]="menu._id ? 'Save' : 'Add'"
-                class="p-button-outlined float-end" (click)="addMenu($event)"></button>
+                class="p-button-outlined float-end" (click)="addMenu()" [disabled]="isSaving"></button>
         </h4><br>
         <div class="row">
             <div class="col-md-6">
@@ -27,7 +27,7 @@
                 targetHeader="Selected Items" [responsive]="true" [sourceStyle]="{'height':'25rem'}"
                 [targetStyle]="{'height':'25rem'}" filterBy="name" sourceFilterPlaceholder="Search by name"
                 targetFilterPlaceholder="Search by name" [showSourceControls]="false" [showTargetControls]="false"
-                (onMoveToTarget)="sortSelectedItems()">
+                [metaKeySelection]="false" (onMoveToTarget)="sortSelectedItems()">
                 <ng-template let-item pTemplate="item">
                     <div class="product-item">
                         <div class="image-container">
@@ -49,3 +49,5 @@
         </div>
     </div>
 </p-sidebar>
+
+<p-toast position="bottom-center"></p-toast>

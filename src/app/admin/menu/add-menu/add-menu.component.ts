@@ -3,11 +3,14 @@ import { AppConstants } from 'src/app/models/const.model';
 import { AdminService } from '../../admin.service';
 import { Menu } from 'src/app/models/menu.model';
 import { Item } from 'src/app/models/item.model';
+import { ItemType } from 'src/app/models/itemtypes.model';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-menu',
   templateUrl: './add-menu.component.html',
-  styleUrls: ['./add-menu.component.css']
+  styleUrls: ['./add-menu.component.css'],
+  providers: [MessageService]
 })
 export class AddMenuComponent implements OnInit {
   @Input() _menu!: any;
@@ -18,6 +21,8 @@ export class AddMenuComponent implements OnInit {
   display = true;
 
   isLoading = true;
+  isSaving = false;
+
   items: Item[] = [];
   menu: any = {
     name: null,
@@ -25,7 +30,7 @@ export class AddMenuComponent implements OnInit {
     items: [],
   };
 
-  constructor(private adminSerive: AdminService) { }
+  constructor(private adminSerive: AdminService, private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.getAllItems();
@@ -47,16 +52,53 @@ export class AddMenuComponent implements OnInit {
     })
   }
 
-  addMenu(event: any) {
-    event.target.disabled = true;
+  addMenu() {
+    if (!this.isValidMenu(this.menu)) return;
     this.menu.items = this.menu.items.map((x: any) => x._id);
     const menu: Menu = { ...this.menu };
+    this.isSaving = true;
     this.adminSerive.saveMenu(menu).subscribe((res) => {
       if (res.status == 200) {
         this.menu._id = res.data._id;
         this.onSaveMenu.emit(this.menu);
       }
     });
+  }
+
+  isValidMenu(menu: any) {
+    let sabjiCnt = 0, rotiCnt = 0, dalCnt = 0, riceCnt = 0;
+    for (let item of menu.items) {
+      const type: keyof typeof ItemType = item.type;
+      switch (ItemType[type]) {
+        case ItemType.SABJI:
+          sabjiCnt++;
+          break;
+        case ItemType.ROTI:
+          rotiCnt++;
+          break;
+        case ItemType.DAL:
+          dalCnt++;
+          break;
+        case ItemType.RICE:
+          riceCnt++;
+          break;
+      }
+    }
+
+    let invalid = false, minCnt, type;
+    if (sabjiCnt < 2) {
+      invalid = true; minCnt = 2; type = 'Sabji';
+    } else if (rotiCnt < 1) {
+      invalid = true; minCnt = 1; type = 'Roti';
+    } else if (dalCnt < 1) {
+      invalid = true; minCnt = 1; type = 'Dal';
+    } else if (riceCnt < 1) {
+      invalid = true; minCnt = 1; type = 'Rice';
+    }
+
+    if (invalid)
+      this.messageService.add({ severity: 'error', detail: `Please select atleast ${minCnt} ${type}.` });
+    return !invalid;
   }
 
   sortSelectedItems() {
