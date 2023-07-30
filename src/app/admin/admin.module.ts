@@ -10,6 +10,7 @@ import { DialogModule } from 'primeng/dialog';
 import { RippleModule } from 'primeng/ripple';
 import { ButtonModule } from 'primeng/button';
 import { SidebarModule } from 'primeng/sidebar';
+import { ListboxModule } from 'primeng/listbox';
 import { TooltipModule } from 'primeng/tooltip';
 import { CalendarModule } from 'primeng/calendar';
 import { PickListModule } from 'primeng/picklist';
@@ -71,6 +72,7 @@ import { OrdersComponent } from './orders/orders.component';
     RippleModule,
     ButtonModule,
     SidebarModule,
+    ListboxModule,
     TooltipModule,
     CalendarModule,
     DropdownModule,

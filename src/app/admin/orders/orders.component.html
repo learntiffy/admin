@@ -16,7 +16,7 @@
                     tooltipPosition="bottom" (click)="exportExcel()"></button>
                 <button type="button" pButton pRipple icon="pi pi-file-pdf"
                     class="p-button-rounded p-button-outlined p-button-warning mr-2" pTooltip="PDF"
-                    tooltipPosition="bottom" (click)="exportPdf()"></button>
+                    tooltipPosition="bottom" (click)="exportOptions.show($event)"></button>
             </div>
         </div>
 
@@ -45,6 +45,9 @@
                     </th>
                     <th>Comment</th>
                     <th>Address</th>
+                    <th pSortableColumn="subArea">
+                        SubArea <p-sortIcon field="subArea"></p-sortIcon>
+                    </th>
                     <th pSortableColumn="area">
                         Area <p-sortIcon field="area"></p-sortIcon>
                     </th>
@@ -72,6 +75,7 @@
                             [class]="'item-badge meal-' + order.meal.toLowerCase()">{{item}}</span></td>
                     <td>{{order.comment}}</td>
                     <td>{{order.address}}</td>
+                    <td>{{order.subArea}}</td>
                     <td>{{order.area}}</td>
                     <td>{{order.amount}}</td>
                     <td><span [class]="'meal-badge meal-' + (order.meal ? order.meal.toLowerCase() : '')">
@@ -95,8 +99,10 @@
     </div>
 </div>
 
-<p-dialog header="Statistics" [(visible)]="showStats" [modal]="true" [style]="{width: '50vw'}"
+<p-dialog header="Statitics" [(visible)]="showStats" [modal]="true" [style]="{width: '50vw'}"
     [breakpoints]="{'960px': '95vw'}" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+    <div class="d-flex justify-content-center pb-3"><p-selectButton id="meal" [(ngModel)]="selectedMeal"
+            [options]="mealTypes" (onChange)="onShowStats()"></p-selectButton></div>
     <p-table [value]="stats" responsiveLayout="scroll" styleClass="p-datatable-sm">
         <ng-template pTemplate="header">
             <tr>
@@ -112,3 +118,9 @@
         </ng-template>
     </p-table>
 </p-dialog>
+
+<p-overlayPanel #exportOptions>
+    <ng-template pTemplate>
+        <p-listbox [options]="['LUNCH', 'DINNER']" (onChange)="exportPdf(exportOptions, $event.value)"></p-listbox>
+    </ng-template>
+</p-overlayPanel>

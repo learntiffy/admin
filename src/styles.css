@@ -312,5 +312,8 @@ body {
     .p-calendar-w-btn .p-inputtext {
         width: 120px;
     }
+}
 
+.p-overlaypanel .p-overlaypanel-content {
+    padding: 0;
 }

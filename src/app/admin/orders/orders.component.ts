@@ -19,6 +19,8 @@ export class OrdersComponent implements OnInit {
 
   stats: any;
   showStats = false;
+  mealTypes = AppConstants.MEAL_TYPES;
+  selectedMeal = this.mealTypes[0];
 
   exportColumns: any;
 
@@ -45,7 +47,7 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders() {
-    this.orders = [];
+    this.orderData = [];
     this.isLoading = true;
     this.adminService.getOrders(this.date).subscribe(res => {
       if (res.status === 200) {
@@ -64,7 +66,8 @@ export class OrdersComponent implements OnInit {
       user: `${user.firstName} ${user.lastName}`,
       contact: user.mobile,
       address: `${address.homeNo}, ${address.society}, ${address.landmark}, ${address.subArea.name}, ${address.area.name} - ${address.area.pincode}`,
-      area: `${address.subArea.name}, ${address.area.name}`,
+      subArea: address.subArea.name,
+      area: address.area.name,
       amount: order.amount,
       meal: order.meal,
       items: order.items.map(x => x.name),
@@ -79,9 +82,12 @@ export class OrdersComponent implements OnInit {
 
   onShowStats() {
     this.stats = {};
-    for (const order of this.orderData)
-      for (const item of order.items)
-        this.stats[item] = this.stats[item] ? (this.stats[item] + 1) : 1;
+    for (const order of this.orderData) {
+      if (order.meal === this.selectedMeal) {
+        for (const item of order.items)
+          this.stats[item] = this.stats[item] ? (this.stats[item] + 1) : 1;
+      }
+    }
 
     const stats = [];
     for (const [key, value] of Object.entries(this.stats)) {
@@ -96,8 +102,12 @@ export class OrdersComponent implements OnInit {
     orderDt.filterGlobal(event.target.value, 'contains');
   }
 
-  exportPdf() {
-    this.adminService.exportPdf('orders.pdf', this.exportColumns, this.orderData);
+  exportPdf(exportOptions: any, meal: string) {
+    const orderData = this.orderData.slice()
+      .filter((x: any) => x.meal === meal)
+      .sort((a: any, b: any) => a.area.localeCompare(b.area) || a.subArea.localeCompare(b.subArea));
+    this.adminService.exportPdf('orders.pdf', this.exportColumns, orderData);
+    exportOptions.hide();
   }
 
   exportExcel() {
