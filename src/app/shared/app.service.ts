@@ -17,7 +17,7 @@ export class AppService {
   logout() {
     localStorage.clear();
     this.isLoggedIn = false;
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/login');
   }
 
 }
