@@ -11,13 +11,14 @@
             dataKey="_id" [resizableColumns]="true" columnResizeMode="expand"
             [globalFilterFields]="['name', 'price', 'unit', 'type', 'status']">
             <ng-template pTemplate="caption">
-                <div class="flex">
-                    <span class="p-input-icon-left ml-auto">
+                <div class="d-flex justify-content-between">
+                    <span class="p-input-icon-left" style="width: 200px;">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="filter(itemDt, $event)" placeholder="Search keyword" />
-                        <button pButton pRipple type="button" icon="pi pi-filter-slash"
-                            class="p-button-rounded p-button-text" (click)="itemDt.clear()"></button>
+                        <input pInputText type="text" (input)="filter(itemDt, $event)" class="w-100"
+                            placeholder="Search keyword" />
                     </span>
+                    <button pButton pRipple type="button" icon="pi pi-filter-slash"
+                        class="p-button-rounded p-button-text pt-3" (click)="itemDt.clear()"></button>
                 </div>
             </ng-template>
 
