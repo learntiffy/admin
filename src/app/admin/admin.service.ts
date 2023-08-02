@@ -125,4 +125,8 @@ export class AdminService {
     return this.http.get<Response>(`${host}/admin/get/order?date=${date}`);
   }
 
+  public changeOrderStatus(order: any): Observable<Response> {
+    return this.http.put<Response>(`${host}/admin/change/order/status`, { order: order });
+  }
+
 }

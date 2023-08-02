@@ -37,6 +37,7 @@
 
             <ng-template pTemplate="header" let-columns>
                 <tr>
+                    <th>Action</th>
                     <th pSortableColumn="user">
                         User <p-sortIcon field="user"></p-sortIcon>
                     </th>
@@ -70,6 +71,15 @@
 
             <ng-template pTemplate="body" let-order>
                 <tr [pSelectableRow]="order">
+                    <td>
+                        <button *ngIf="order.status === 'ORDERED'" pButton pRipple icon="pi pi-check"
+                            class="p-button-rounded p-button-outlined p-button-success mr-2"
+                            pTooltip="Mark as Delivered" tooltipPosition="bottom"
+                            (click)="markAsDelivered(order)"></button>
+                        <button *ngIf="order.status === 'DELIVERED'" pButton pRipple icon="pi pi-check"
+                            class="p-button-rounded p-button-success mr-2" pTooltip="Delivered"
+                            tooltipPosition="bottom"></button>
+                    </td>
                     <td>{{order.user}}</td>
                     <td>{{order.contact}}</td>
                     <td><span *ngFor="let item of order.items"
@@ -117,6 +127,11 @@
                 <td class="text-center">{{stat.count}}</td>
             </tr>
         </ng-template>
+        <ng-template pTemplate="footer" let-stat>
+            <tr *ngIf="stats.length == 0">
+                <td colspan="2" class="text-center">No Data Available</td>
+            </tr>
+        </ng-template>
     </p-table>
 </p-dialog>
 
@@ -125,3 +140,5 @@
         <p-listbox [options]="['LUNCH', 'DINNER']" (onChange)="exportPdf(exportOptions, $event.value)"></p-listbox>
     </ng-template>
 </p-overlayPanel>
+
+<p-confirmDialog header="Confirm" icon="pi pi-exclamation-triangle"></p-confirmDialog>

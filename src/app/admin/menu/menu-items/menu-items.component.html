@@ -16,6 +16,9 @@
                 <th pSortableColumn="type">
                     Type <p-sortIcon field="type"></p-sortIcon>
                 </th>
+                <th pSortableColumn="status">
+                    Status <p-sortIcon field="status"></p-sortIcon>
+                </th>
             </tr>
         </ng-template>
 
@@ -26,6 +29,10 @@
                 <td><i class="fa fa-rupee"></i> {{item.price}}</td>
                 <td>
                     <span [class]="'type-badge type-' +(item.type ? item.type.toLowerCase() : '')">{{item.type}}</span>
+                </td>
+                <td>
+                    <span
+                        [class]="'status-badge status-' +(item.status ? item.status.toLowerCase() : '')">{{item.status}}</span>
                 </td>
             </tr>
         </ng-template>

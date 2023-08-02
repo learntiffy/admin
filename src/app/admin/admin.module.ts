@@ -21,6 +21,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { AdminRoutingModule } from './admin-routing.module';
@@ -83,6 +84,7 @@ import { OrdersComponent } from './orders/orders.component';
     ProgressBarModule,
     OverlayPanelModule,
     SelectButtonModule,
+    ConfirmDialogModule,
     InputTextareaModule
   ]
 })

@@ -216,6 +216,11 @@ body {
         background: #FEEDAF;
         color: #8a5340;
     }
+
+    &.status-registered {
+        background: #FEEDAF;
+        color: #8a5340;
+    }
 }
 
 .type-badge {

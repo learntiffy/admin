@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../admin.service';
 import { Order } from 'src/app/models/order.model';
 import { AppConstants } from 'src/app/models/const.model';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  styleUrls: ['./orders.component.css'],
+  providers: [ConfirmationService]
 })
 export class OrdersComponent implements OnInit {
 
@@ -24,7 +26,9 @@ export class OrdersComponent implements OnInit {
 
   exportColumns: any;
 
-  constructor(private adminService: AdminService) { }
+  constructor(
+    private adminService: AdminService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.exportColumns = [
@@ -63,6 +67,7 @@ export class OrdersComponent implements OnInit {
     const address = order.address;
     const feedback = order.feedback;
     const orderData = {
+      _id: order._id,
       user: `${user.firstName} ${user.lastName}`,
       contact: user.mobile,
       address: `${address.homeNo}, ${address.society}, ${address.landmark}, ${address.subArea.name}, ${address.area.name} - ${address.area.pincode}`,
@@ -74,10 +79,24 @@ export class OrdersComponent implements OnInit {
       _items: order.items.map(x => x.name).toString(),
       comment: order.comment,
       orderDate: order.orderDate,
+      status: order.status,
       rating: feedback ? feedback.foodRating : null,
       feedback: feedback ? feedback.comment : null
     };
     return orderData;
+  }
+
+  markAsDelivered(order: Order) {
+    const delivered = AppConstants.ORDER_STATUSES[1];
+    const _order = { _id: order._id, status: delivered };
+    order.status = delivered;
+    this.adminService.changeOrderStatus(_order).subscribe();
+    this.confirmationService.confirm({
+      message: 'Are you sure that you want to mark this order as Delivered?',
+      accept: () => {
+        alert(12345)
+      }
+    });
   }
 
   onShowStats() {
