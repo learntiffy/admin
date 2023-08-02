@@ -87,14 +87,13 @@ export class OrdersComponent implements OnInit {
   }
 
   markAsDelivered(order: Order) {
-    const delivered = AppConstants.ORDER_STATUSES[1];
-    const _order = { _id: order._id, status: delivered };
-    order.status = delivered;
-    this.adminService.changeOrderStatus(_order).subscribe();
     this.confirmationService.confirm({
       message: 'Are you sure that you want to mark this order as Delivered?',
       accept: () => {
-        alert(12345)
+        const delivered = AppConstants.ORDER_STATUSES[1];
+        const _order = { _id: order._id, status: delivered };
+        order.status = delivered;
+        this.adminService.changeOrderStatus(_order).subscribe();
       }
     });
   }
