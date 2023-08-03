@@ -12,7 +12,6 @@ import { MessageService } from 'primeng/api';
 export class SetMenuDayComponent implements OnInit {
   @Input() menuDay: any;
   @Input() meal: any;
-  @Output() onSaveMenuDay = new EventEmitter<any>();
   @Output() onClose = new EventEmitter();
 
   display = true;
@@ -43,6 +42,7 @@ export class SetMenuDayComponent implements OnInit {
     if (this.selectedMenu) {
       const menuDay = { ...this.menuDay };
       this.menuDay.menu = this.selectedMenu;
+      this.menuDay.isSet = true;
       menuDay.menu = this.selectedMenu._id;
       this.adminService.saveMenuDay(menuDay).subscribe(res => { });
       this.onClose.emit();
