@@ -21,21 +21,23 @@
                         <div class="product-item">
                             <div class="product-item-content">
                                 <div>
-                                    <h4 class="mb-4 text-truncate">{{$any(meal.value).menu.name}}</h4>
+                                    <h4 class="mb-4 text-truncate" [ngClass]="{'text-danger': !$any(meal.value).isSet}">
+                                        {{$any(meal.value).isSet ?$any(meal.value).menu.name : 'PLEASE SET'}}</h4>
                                     <span *ngIf="meal.key == 'lunch'" class="meal-badge meal-lunch fs-16">LUNCH</span>
                                     <span *ngIf="meal.key == 'dinner'"
                                         class="meal-badge meal-dinner fs-16">DINNER</span>
                                     <div class="car-buttons mt-4">
-                                        <p-button type="button"
+                                        <p-button *ngIf="$any(meal.value).isSet" type="button"
                                             styleClass="p-button p-button-rounded p-button-outlined mr-2"
                                             icon="pi pi-eye"
                                             (click)="onViewMenuItems($any(meal.value).menu)"></p-button>
-                                        <p-button type="button"
+                                        <p-button *ngIf="$any(meal.value).isSet" type="button"
                                             styleClass="p-button p-button-rounded p-button-outlined mr-2"
                                             icon="pi pi-pencil" (click)="onEdit($any(meal.value).menu)"></p-button>
                                         <p-button type="button"
                                             styleClass="p-button p-button-rounded p-button-outlined mr-2"
-                                            icon="pi pi-cog" (click)="onMenuSelection($any(meal.value), meal.key)"></p-button>
+                                            icon="pi pi-cog"
+                                            (click)="onMenuSelection($any(meal.value), meal.key)"></p-button>
                                     </div>
                                 </div>
                             </div>
