@@ -22,7 +22,7 @@
                             <div class="product-item-content">
                                 <div>
                                     <h4 class="mb-4 text-truncate" [ngClass]="{'text-danger': !$any(meal.value).isSet}">
-                                        {{$any(meal.value).isSet ?$any(meal.value).menu.name : 'PLEASE SET'}}</h4>
+                                        {{$any(meal.value).isSet ?$any(meal.value).menu.name : 'PLEASE SET MENU'}}</h4>
                                     <span *ngIf="meal.key == 'lunch'" class="meal-badge meal-lunch fs-16">LUNCH</span>
                                     <span *ngIf="meal.key == 'dinner'"
                                         class="meal-badge meal-dinner fs-16">DINNER</span>

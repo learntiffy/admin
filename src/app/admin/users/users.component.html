@@ -16,7 +16,7 @@
     </div>
 
     <p-table #userDt [columns]="cols" [value]="users" dataKey="_id" [rowHover]="true" [resizableColumns]="true"
-      columnResizeMode="expand" [globalFilterFields]="['firstName', 'lastName', 'mobile', 'email', 'status']"
+      columnResizeMode="expand" [globalFilterFields]="['firstName', 'lastName', 'mobile', 'email']"
       responsiveLayout="scroll">
       <ng-template pTemplate="caption">
         <div class="d-flex justify-content-between">
