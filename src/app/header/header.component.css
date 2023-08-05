@@ -10,6 +10,11 @@
     top: 0;
 }
 
+.navbar-brand {
+    margin: 0;
+    padding: 0;
+}
+
 .w-15 {
     width: 15px;
 }
