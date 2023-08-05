@@ -40,9 +40,9 @@ export class SetMenuDayComponent implements OnInit {
 
   saveMenuDay() {
     if (this.selectedMenu) {
+      this.menuDay.isSet = true;
       const menuDay = { ...this.menuDay };
       this.menuDay.menu = this.selectedMenu;
-      this.menuDay.isSet = true;
       menuDay.menu = this.selectedMenu._id;
       this.adminService.saveMenuDay(menuDay).subscribe(res => { });
       this.onClose.emit();

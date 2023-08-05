@@ -29,15 +29,20 @@
                                     <div class="car-buttons mt-4">
                                         <p-button *ngIf="$any(meal.value).isSet" type="button"
                                             styleClass="p-button p-button-rounded p-button-outlined mr-2"
-                                            icon="pi pi-eye"
+                                            icon="pi pi-eye" pTooltip="View menu items" tooltipPosition="top"
                                             (click)="onViewMenuItems($any(meal.value).menu)"></p-button>
                                         <p-button *ngIf="$any(meal.value).isSet" type="button"
                                             styleClass="p-button p-button-rounded p-button-outlined mr-2"
-                                            icon="pi pi-pencil" (click)="onEdit($any(meal.value).menu)"></p-button>
+                                            icon="pi pi-pencil" pTooltip="Edit menu items" tooltipPosition="top"
+                                            (click)="onEdit($any(meal.value).menu)"></p-button>
                                         <p-button type="button"
                                             styleClass="p-button p-button-rounded p-button-outlined mr-2"
-                                            icon="pi pi-cog"
+                                            icon="pi pi-cog" pTooltip="Set menu" tooltipPosition="top"
                                             (click)="onMenuSelection($any(meal.value), meal.key)"></p-button>
+                                        <p-button *ngIf="$any(meal.value).isSet" type="button"
+                                            styleClass="p-button p-button-rounded p-button-outlined mr-2 mt-2"
+                                            icon="pi pi-times" pTooltip="Disable the menu" tooltipPosition="top"
+                                            (click)="onUnset($any(meal.value))"></p-button>
                                     </div>
                                 </div>
                             </div>
@@ -56,3 +61,6 @@
 
 <app-set-menu-day *ngIf="showMenuSelectionModal" [menuDay]="menuDay" [meal]="meal"
     (onClose)="showMenuSelectionModal=false"></app-set-menu-day>
+
+<p-confirmDialog [breakpoints]="{'960px': '50vw', '640px': '95vw'}" header="Confirm" icon="pi pi-exclamation-triangle"
+    defaultFocus="none"></p-confirmDialog>

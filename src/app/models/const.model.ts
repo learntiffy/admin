@@ -16,3 +16,10 @@ export class AppConstants {
         { name: "45 days", value: 45 },
     ]
 };
+
+export enum MenuDay {
+    TODAY_LUNCH = "Today's Lunch",
+    TODAY_DINNER = "Today's Dinner",
+    TOMO_LUNCH = "Tomorrow's Lunch",
+    TOMO_DINNER = "Tomorrow's Dinner",
+}

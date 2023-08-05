@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../admin.service';
 import { Menu } from 'src/app/models/menu.model';
+import { ConfirmationService } from 'primeng/api';
+import { MenuDay } from 'src/app/models/const.model';
 
 @Component({
   selector: 'app-set-menu',
   templateUrl: './set-menu.component.html',
-  styleUrls: ['./set-menu.component.css']
+  styleUrls: ['./set-menu.component.css'],
+  providers: [ConfirmationService]
 })
 export class SetMenuComponent implements OnInit {
 
@@ -23,7 +26,10 @@ export class SetMenuComponent implements OnInit {
   menuDay: any;
   meal: any
 
-  constructor(private adminService: AdminService) { }
+  constructor(
+    private adminService: AdminService,
+    private confirmationService: ConfirmationService
+  ) { }
 
   ngOnInit(): void {
     this.setDates();
@@ -60,6 +66,23 @@ export class SetMenuComponent implements OnInit {
     this.menuDay = menuDay;
     this.meal = meal;
     this.showMenuSelectionModal = true;
+  }
+
+  onUnset(menuDay: any) {
+    const day: keyof typeof MenuDay = menuDay.day;
+    this.confirmationService.confirm({
+      message: `Are you sure that you want to disable the menu? After disabling the menu, User won't be able to place the order for ${MenuDay[day]}.`,
+      accept: () => {
+        this.unsetMenuDay(menuDay);
+      }
+    });
+
+  }
+
+  unsetMenuDay(menuDay: any) {
+    menuDay.menu = menuDay.menu._id;
+    menuDay.isSet = false;
+    this.adminService.saveMenuDay(menuDay).subscribe(res => { });
   }
 
 }
