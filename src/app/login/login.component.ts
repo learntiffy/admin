@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private appService: AppService, private adminService: AdminService) { }
 
   ngOnInit(): void {
-    localStorage.getItem('token') ? this.router.navigateByUrl('/admin/dashboard') : '';
+    localStorage.getItem('token') ? this.router.navigateByUrl('/admin/users') : '';
   }
 
   login() {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       else if (res.status == 200) {
         localStorage.setItem('token', res.data);
         this.appService.login();
-        this.router.navigateByUrl('/admin/dashboard');
+        this.router.navigateByUrl('/admin/users');
       }
       this.isLoading = false;
     });

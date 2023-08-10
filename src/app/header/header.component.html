@@ -11,9 +11,9 @@
 
 <div id="mySidenav" class="sidenav shadow mt-2"
     [ngClass]="{'d-none': !appService.isLoggedIn, 'd-block': appService.isLoggedIn}">
-    <a routerLink="/admin/dashboard" routerLinkActive="active" (click)="toggleNav()">
+    <!-- <a routerLink="/admin/dashboard" routerLinkActive="active" (click)="toggleNav()">
         <i class="fa fa-home w-15"></i> &nbsp; Dashboard
-    </a>
+    </a> -->
     <a routerLink="/admin/users" routerLinkActive="active" (click)="toggleNav()">
         <i class="fas fa-users"></i>&nbsp; Users
     </a>

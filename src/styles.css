@@ -255,6 +255,11 @@ body {
         background: #b3e5fc;
         color: #23547b;
     }
+
+    &.type-extra {
+        background: #fcc39b;
+        color: #f97316;
+    }
 }
 
 .item-badge {

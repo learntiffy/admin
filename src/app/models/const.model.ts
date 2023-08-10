@@ -4,7 +4,7 @@ export class AppConstants {
     static readonly SUBAREA_STATUSES = ["ACTIVE", "INACTIVE"];
     static readonly ITEM_STATUSES = ["ACTIVE", "INACTIVE"];
     static readonly ORDER_STATUSES = ["ORDERED", "DELIVERED"];
-    static readonly ITEM_TYPES = ["SABJI", "ROTI", "DAL", "RICE", "SPECIAL"];
+    static readonly ITEM_TYPES = ["SABJI", "ROTI", "DAL", "RICE", "SPECIAL", "EXTRA"];
     static readonly MEAL_TYPES = ["LUNCH", "DINNER"];
 
     static readonly DAYS_OPS = [

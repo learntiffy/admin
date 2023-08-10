@@ -3,5 +3,6 @@ export enum ItemType {
     ROTI,
     DAL,
     RICE,
-    SPECIAL
+    SPECIAL,
+    EXTRA
 }
